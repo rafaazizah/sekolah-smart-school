@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Absensi Guru – Smart Sukses School</title>
+<style>
+:root{--navy:#0b2a6b;--navy2:#16408f;--green:#4f9a1a;--green2:#7cb518;--bg:#eef3f9;--card:#fff;--tx:#12203f;--mut:#58698a;--bd:#d6dfec;--soft:#e8f2dc;--ok:#2d7f2d;--warn:#b87400;--bad:#c0272d;--info:#1d5fc4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1226;--card:#121d3b;--tx:#e8eefb;--mut:#9db0d4;--bd:#25365f;--soft:#1c3320;--ok:#7fd16a;--warn:#f0b34a;--bad:#ff8a8f;--info:#8db8ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a1226;--card:#121d3b;--tx:#e8eefb;--mut:#9db0d4;--bd:#25365f;--soft:#1c3320;--ok:#7fd16a;--warn:#f0b34a;--bad:#ff8a8f;--info:#8db8ff;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.5 "Segoe UI",system-ui,Roboto,Arial,sans-serif;min-height:100vh}
+h1,h2,h3{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--navy)}
+@media(prefers-color-scheme:dark){h1,h2,h3{color:#fff}}
+h2{font-size:22px}h3{font-size:16px}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+aside{background:var(--navy);color:#fff;padding:18px 14px;display:flex;flex-direction:column;gap:6px;border-right:5px solid var(--green2)}
+.brand{display:flex;gap:10px;align-items:center;font-family:Georgia,serif;font-weight:700;line-height:1.1;padding:4px 6px 14px}
+.brand small{display:block;font:11px "Segoe UI",sans-serif;color:#b9c8ea;font-weight:400;margin-top:3px}
+aside button.nav{all:unset;cursor:pointer;padding:10px 12px;border-radius:8px;color:#d7e2fb;display:block}
+aside button.nav:hover{background:#ffffff18}
+aside button.nav.on{background:var(--green);color:#fff;font-weight:600}
+.me{margin-top:auto;font-size:13px;color:#b9c8ea;padding:10px 6px;border-top:1px solid #ffffff30}
+main{padding:24px;max-width:1100px;width:100%}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.top p{margin:2px 0 0;color:var(--mut)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:18px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-left:5px solid var(--navy2);border-radius:10px;padding:12px 14px}
+.kpi b{font-size:28px;display:block;font-family:Georgia,serif}
+.kpi span{color:var(--mut);font-size:13px}
+.kpi.g{border-left-color:var(--green)}.kpi.w{border-left-color:#e0a000}.kpi.r{border-left-color:var(--bad)}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--bd);vertical-align:top}
+th{background:var(--navy);color:#fff;font-weight:600;font-size:13px}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--bg) 60%,transparent)}
+label{display:block;font-weight:600;font-size:13px;margin:12px 0 4px;color:var(--navy)}
+@media(prefers-color-scheme:dark){label{color:#cfe0ff}}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:3px solid var(--green2);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn{cursor:pointer;border:0;border-radius:8px;padding:10px 16px;font:inherit;font-weight:600;background:var(--green);color:#fff}
+.btn:hover{background:#3f8512}.btn.n{background:var(--navy)}.btn.n:hover{background:var(--navy2)}
+.btn.o{background:transparent;color:var(--navy);border:1px solid var(--navy)}
+@media(prefers-color-scheme:dark){.btn.o{color:#fff;border-color:#9db0d4}}
+.btn.s{padding:5px 10px;font-size:13px}.btn.d{background:var(--bad)}
+.bd{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:700;background:var(--bg);color:var(--mut)}
+.bd.Hadir,.bd.Disetujui,.bd.Terverifikasi{background:var(--soft);color:var(--ok)}
+.bd.Terlambat,.bd.Pending{background:#fff1d1;color:#8a5a00}.bd.Izin,.bd.Sakit{background:#dde9fb;color:#124a9c}
+.bd.Alpa,.bd.Ditolak{background:#fde0e1;color:#a21c22}
+@media(prefers-color-scheme:dark){.bd.Terlambat,.bd.Pending{background:#3d3010;color:#f0b34a}.bd.Izin,.bd.Sakit{background:#17306a;color:#a9c7ff}.bd.Alpa,.bd.Ditolak{background:#4a1a1e;color:#ff9da2}}
+.note{padding:10px 12px;border-radius:8px;background:var(--soft);border-left:4px solid var(--green);margin-bottom:12px;font-size:14px}
+.note.w{background:#fff1d1;border-color:#e0a000;color:#5c3d00}
+@media(prefers-color-scheme:dark){.note.w{background:#3d3010;color:#f6d79b}}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;min-width:90px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--navy2),var(--green2))}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,var(--navy) 0 55%,var(--green) 55% 100%)}
+.lbox{background:var(--card);border-radius:14px;padding:28px;max-width:440px;width:100%;box-shadow:0 10px 40px #0006}
+.roles{display:grid;gap:8px;margin:14px 0}
+.role{cursor:pointer;text-align:left;padding:12px 14px;border:2px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx);font:inherit}
+.role b{display:block;color:var(--navy)}@media(prefers-color-scheme:dark){.role b{color:#fff}}
+.role.on{border-color:var(--green);background:var(--soft)}
+.mod{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:50}
+.mod>div{background:var(--card);border-radius:12px;padding:22px;max-width:460px;width:100%;max-height:90vh;overflow:auto}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:8px;z-index:60;border-left:5px solid var(--green2)}
+.toast.e{border-left-color:var(--bad);background:#7a1519}
+@media(max-width:760px){.app{grid-template-columns:1fr}aside{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:5px solid var(--green2);padding:10px}.brand{width:100%;padding-bottom:6px}.me{display:none}main{padding:14px}.row{grid-template-columns:1fr}}
+.navbar{display:flex;justify-content:space-between;gap:8px;margin-bottom:14px}
+@media print{aside,.noprint{display:none!important}.app{display:block}body{background:#fff}th{background:#0b2a6b!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><div id="root"></div><div id="ov"></div>
+<script>
+const LOGO='<svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true"><path d="M4 4h36v20c0 9-8 15-18 18C12 39 4 33 4 24z" fill="#fff"/><path d="M7 7h15v16c0 7-6 11-15 14z" fill="#0b2a6b"/><path d="M22 7h15v17c0 7-6 12-15 15z" fill="#7cb518" opacity=".55"/><path d="M11 22l10-4 12 4v5l-12 4-10-4z" fill="#4f9a1a" stroke="#fff" stroke-width="1.5"/><path d="M11 22l10 4 12-4" fill="none" stroke="#fff" stroke-width="1.5"/></svg>';
+const TODAY='2026-11-25',BULAN='2026-11';
+const $=s=>document.querySelector(s);
+const e=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=d=>new Date(d+'T00:00').toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+let seed=11;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+let nid=1000;
+const G=[['Ahmad Fauzi, S.Pd','Matematika'],['Siti Rahmawati, S.Pd','Bahasa Inggris'],['Hasan Basri, Lc','Bahasa Arab'],['Nur Aini, S.Pd.I','Tilawah'],['Ibrahim, S.Ag','Tahfiz'],['Rina Marlina, S.Pd','Bahasa Indonesia'],['Dedi Kurniawan, S.Kom','Informatika'],['Fitriani, S.Si','IPA'],['Yusuf Maulana, S.Pd','IPS'],['Laila Hidayati, S.Pd','PPKn'],['Zaki Mubarak, S.Pd.I','Praktik Ibadah'],['Mega Putri, S.Pd','Seni Budaya']].map((g,i)=>({id:i+1,nama:g[0],nip:'19'+(880000+i*137),mapel:g[1]}));
+const days=[];for(let i=1;days.length<10;i++){const d=new Date('2026-11-25T00:00');d.setDate(d.getDate()-i);const w=d.getDay();if(w>=1&&w<=4)days.push(d.toISOString().slice(0,10))}
+const P=[];
+function addP(g,tgl,st,masuk,pulang,jr,val){P.push({id:nid++,gid:g.id,tgl,status:st,masuk,pulang,mapel:g.mapel,jurnal:jr,validasi:val||'Terverifikasi'})}
+G.forEach(g=>{days.forEach(t=>{const r=rnd();if(r<.74)addP(g,t,'Hadir','12:0'+Math.floor(rnd()*9),'16:05','Materi '+g.mapel+' bab berjalan');else if(r<.82)addP(g,t,'Hadir','12:4'+Math.floor(rnd()*9),'16:05','Latihan soal '+g.mapel);else if(r<.89)addP(g,t,'Izin','','','-');else if(r<.95)addP(g,t,'Sakit','','','-');else addP(g,t,'Alpa','','','-','Belum')});
+if(g.id<=7)addP(g,TODAY,'Hadir','12:0'+g.id,'','Pembahasan materi '+g.mapel)});
+const REQ=[{id:1,gid:8,tgl:'2026-11-26',kat:'Sakit',alasan:'Demam, anjuran istirahat dari dokter',file:'surat-dokter.pdf',st:'Pending',cat:''},{id:2,gid:10,tgl:'2026-11-30',kat:'Izin',alasan:'Menghadiri acara keluarga di luar kota',file:'undangan.jpg',st:'Pending',cat:''},{id:3,gid:5,tgl:'2026-11-18',kat:'Izin',alasan:'Urusan administrasi',file:'surat-izin.pdf',st:'Disetujui',cat:'Dokumen lengkap'}];
+const LOG=[];
+const S={user:null,view:'',role:'Guru',gid:1,rg:0,pr:'bulanan',kf:'',hist:[]};
+const NAV={Guru:[['dash','Rekap Kehadiran'],['absen','Isi Absensi'],['izin','Izin / Sakit'],['riwayat','Riwayat Saya']],Admin:[['verif','Verifikasi Izin'],['koreksi','Koreksi Presensi'],['guru','Data Guru'],['log','Log Koreksi'],['laporan','Laporan']],'Kepala Sekolah':[['dash','Dashboard'],['laporan','Laporan']]};
+const gn=id=>(G.find(g=>g.id==id)||{}).nama||'-';
+const late=r=>r.status==='Hadir'&&r.masuk>'12:30';
+const st=r=>late(r)?'Terlambat':r.status;
+const bd=s=>`<span class="bd ${e(s).replace(/ /g,'')}">${e(s)}</span>`;
+function toast(m,er){const t=document.createElement('div');t.className='toast'+(er?' e':'');t.textContent=m;t.setAttribute('role','status');document.body.appendChild(t);setTimeout(()=>t.remove(),3200)}
+function modal(h){$('#ov').innerHTML=`<div class="mod" onclick="if(event.target===this)closeM()"><div>${h}</div></div>`}
+function closeM(){$('#ov').innerHTML=''}
+function go(v){if(S.view&&S.view!==v){S.hist.push(S.view);if(S.hist.length>20)S.hist.shift()}S.view=v;render()}
+function back(){if(S.hist.length){S.view=S.hist.pop();render()}}
+function login(){S.user=S.role==='Guru'?G.find(g=>g.id==S.gid).nama:S.role==='Admin'?'Admin Sekolah':'Ibu Yenny Tundoong';S.hist=[];S.view=NAV[S.role][0][0];render()}
+function logout(){S.user=null;S.hist=[];S.view='';closeM();render();toast('Anda telah keluar.')}
+function render(){
+ if(!S.user){$('#root').innerHTML=`<div class="login"><div class="lbox"><div style="display:flex;gap:12px;align-items:center"><div style="background:var(--navy);border-radius:10px;padding:4px">${LOGO}</div><div><h2>Smart Sukses School</h2><div style="color:var(--mut)">Sistem Absensi Guru SMA Terbuka</div></div></div>
+ <div class="roles">${['Guru','Admin','Kepala Sekolah'].map(r=>`<button class="role ${S.role===r?'on':''}" onclick="S.role='${r}';render()"><b>${r}</b><span style="color:var(--mut);font-size:13px">${{Guru:'Isi absensi, jurnal, dan ajukan izin',Admin:'Verifikasi izin, koreksi data, kelola guru','Kepala Sekolah':'Pantau kehadiran dan unduh laporan'}[r]}</span></button>`).join('')}</div>
+ ${S.role==='Guru'?`<label for="pg">Masuk sebagai</label><select id="pg" onchange="S.gid=+this.value">${G.map(g=>`<option value="${g.id}" ${g.id==S.gid?'selected':''}>${e(g.nama)}</option>`).join('')}</select>`:''}
+ <button class="btn" style="width:100%;margin-top:16px" onclick="login()">Masuk (mode demo)</button><p style="font-size:12px;color:var(--mut);margin:10px 0 0">Draf demo: data contoh disimpan di browser dan tidak permanen.</p></div></div>`;return}
+ $('#root').innerHTML=`<div class="app"><aside><div class="brand">${LOGO}<div>SMART SUKSES<br>SCHOOL<small>Absensi Guru</small></div></div>${NAV[S.role].map(n=>`<button class="nav ${S.view===n[0]?'on':''}" onclick="go('${n[0]}')">${n[1]}</button>`).join('')}<div class="me"><b style="color:#fff">${e(S.user)}</b><br>${S.role}<br><button class="nav" style="padding:8px 0;color:#9ed35a" onclick="logout()">Keluar</button></div></aside><main id="m"></main></div>`;
+ ({dash,absen,izin,riwayat,verif,koreksi,guru,log,laporan})[S.view]();
+ $('#m').insertAdjacentHTML('afterbegin',`<div class="navbar noprint"><div>${S.hist.length?'<button class="btn o s" onclick="back()">Kembali</button>':''}</div><button class="btn n s" onclick="logout()">Keluar</button></div>`);
+}
+const head=(t,s,x='')=>`<div class="top"><div><h2>${t}</h2><p>${s}</p></div>${x}</div>`;
+function tbl(h,rows,empty='Belum ada data.'){return `<div class="tw"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.join(''):`<tr><td colspan="${h.length}" style="color:var(--mut)">${empty}</td></tr>`}</tbody></table></div>`}
+function dash(){
+ const td=G.map(g=>({g,r:P.find(p=>p.gid==g.id&&p.tgl==TODAY)}));
+ const c=k=>td.filter(x=>x.r&&st(x.r)==k).length;
+ const bln=G.map(g=>{const a=P.filter(p=>p.gid==g.id&&p.tgl.startsWith(BULAN));const h=a.filter(p=>p.status=='Hadir').length;return{g,pct:a.length?Math.round(h/a.length*100):0}});
+ $('#m').innerHTML=head('Rekap Kehadiran','Status guru hari ini, '+fmt(TODAY)+' (diperbarui langsung)')+
+ `<div class="grid"><div class="kpi g"><b>${c('Hadir')}</b><span>Hadir tepat waktu</span></div><div class="kpi w"><b>${c('Terlambat')}</b><span>Terlambat</span></div><div class="kpi"><b>${c('Izin')}</b><span>Izin</span></div><div class="kpi"><b>${c('Sakit')}</b><span>Sakit</span></div><div class="kpi r"><b>${c('Alpa')}</b><span>Alpa</span></div><div class="kpi w"><b>${td.filter(x=>!x.r).length}</b><span>Belum absen</span></div></div>
+ <div class="card"><h3 style="margin-bottom:10px">Kehadiran dan jurnal hari ini</h3>${tbl(['Guru','Mapel','Status','Masuk','Pulang','Jurnal materi'],td.map(x=>`<tr><td>${e(x.g.nama)}</td><td>${e(x.g.mapel)}</td><td>${x.r?bd(st(x.r)):bd('Belum absen')}</td><td>${x.r?.masuk||'-'}</td><td>${x.r?.pulang||'-'}</td><td>${e(x.r?.jurnal||'-')}</td></tr>`))}</div>
+ <div class="card"><h3 style="margin-bottom:10px">Persentase kehadiran bulan ini</h3>${bln.map(b=>`<div style="display:grid;grid-template-columns:1fr 2fr 44px;gap:10px;align-items:center;margin:7px 0"><span>${e(b.g.nama)}</span><div class="bar"><i style="width:${b.pct}%"></i></div><b>${b.pct}%</b></div>`).join('')}</div>`}
+function absen(){
+ const g=G.find(x=>x.id==S.gid),ada=P.find(p=>p.gid==g.id&&p.tgl==TODAY);
+ $('#m').innerHTML=head('Isi Absensi Harian','Catat kehadiran dan jurnal materi untuk '+fmt(TODAY))+
+ (ada?`<div class="note w"><b>Absensi hari ini sudah tercatat</b> (${bd(st(ada))} masuk ${ada.masuk||'-'}). Sistem menolak pengisian ganda pada tanggal yang sama.</div>`:'')+
+ `<div class="card"><div class="row"><div><label for="a1">Status kehadiran</label><select id="a1"><option>Hadir</option></select></div><div><label for="a2">Mata pelajaran</label><select id="a2"><option>${e(g.mapel)}</option></select></div><div><label for="a3">Jam masuk</label><input id="a3" type="time" value="12:05"></div><div><label for="a4">Jam pulang</label><input id="a4" type="time" value="16:00"></div></div><label for="a5">Jurnal materi mengajar</label><textarea id="a5" rows="3" placeholder="Tuliskan materi yang diajarkan hari ini"></textarea><p style="color:var(--mut);font-size:13px">Jam pelajaran dimulai 12.30. Masuk setelah 12.30 dihitung terlambat.</p><button class="btn" onclick="simpanAbsen()">Simpan absensi</button></div>`}
+function simpanAbsen(){
+ const g=G.find(x=>x.id==S.gid),m=$('#a3').value,j=$('#a5').value.trim();
+ if(P.find(p=>p.gid==g.id&&p.tgl==TODAY))return toast('Anda sudah mengisi absensi hari ini. Hubungi Admin jika perlu koreksi.',1);
+ if(!m||!j)return toast('Lengkapi jam masuk dan jurnal materi terlebih dahulu.',1);
+ addP(g,TODAY,'Hadir',m,$('#a4').value,j);toast('Absensi tersimpan.');absen()}
+function izin(){
+ const mine=REQ.filter(r=>r.gid==S.gid);
+ $('#m').innerHTML=head('Pengajuan Izin / Sakit','Unggah surat bukti agar Admin dapat memverifikasi')+
+ `<div class="card"><div class="row"><div><label for="i1">Kategori</label><select id="i1"><option>Izin</option><option>Sakit</option></select></div><div><label for="i2">Tanggal</label><input id="i2" type="date" value="${TODAY}"></div></div><label for="i3">Alasan</label><textarea id="i3" rows="2"></textarea><label for="i4">Surat bukti (PDF atau gambar)</label><input id="i4" type="file" accept=".pdf,image/*"><br><br><button class="btn" onclick="kirimIzin()">Kirim pengajuan</button></div>
+ <div class="card"><h3 style="margin-bottom:10px">Pengajuan saya</h3>${tbl(['Tanggal','Kategori','Bukti','Status','Catatan Admin'],mine.map(r=>`<tr><td>${fmt(r.tgl)}</td><td>${r.kat}</td><td>${e(r.file)}</td><td>${bd(r.st)}</td><td>${e(r.cat||'-')}</td></tr>`))}</div>`}
+function kirimIzin(){
+ const f=$('#i4').files[0],a=$('#i3').value.trim();
+ if(!f)return toast('Dokumen bukti wajib diunggah.',1);
+ if(!/\.(pdf|jpe?g|png|webp)$/i.test(f.name))return toast('Format file harus PDF atau gambar.',1);
+ if(!a)return toast('Alasan wajib diisi.',1);
+ REQ.push({id:nid++,gid:S.gid,tgl:$('#i2').value,kat:$('#i1').value,alasan:a,file:f.name,st:'Pending',cat:''});toast('Pengajuan terkirim dengan status Pending.');izin()}
+function riwayat(){
+ $('#m').innerHTML=head('Riwayat Absensi Saya','Catatan kehadiran dan jurnal terbaru')+`<div class="card">${tbl(['Tanggal','Status','Masuk','Pulang','Jurnal'],P.filter(p=>p.gid==S.gid).sort((a,b)=>b.tgl.localeCompare(a.tgl)).map(p=>`<tr><td>${fmt(p.tgl)}</td><td>${bd(st(p))}</td><td>${p.masuk||'-'}</td><td>${p.pulang||'-'}</td><td>${e(p.jurnal)}</td></tr>`))}</div>`}
+function verif(){
+ $('#m').innerHTML=head('Verifikasi Izin / Sakit','Periksa bukti lalu setujui atau tolak dengan catatan')+`<div class="card">${tbl(['Guru','Tanggal','Kategori','Alasan','Bukti','Status','Aksi'],REQ.map(r=>`<tr><td>${e(gn(r.gid))}</td><td>${fmt(r.tgl)}</td><td>${r.kat}</td><td>${e(r.alasan)}</td><td>${e(r.file)}</td><td>${bd(r.st)}${r.cat?'<br><small>'+e(r.cat)+'</small>':''}</td><td>${r.st=='Pending'?`<button class="btn s" onclick="mVerif(${r.id})">Periksa</button>`:'-'}</td></tr>`))}</div>`}
+function mVerif(id){const r=REQ.find(x=>x.id==id);modal(`<h3>Periksa pengajuan</h3><p><b>${e(gn(r.gid))}</b> – ${r.kat}, ${fmt(r.tgl)}<br>${e(r.alasan)}<br>Bukti: ${e(r.file)}</p><label for="vc">Catatan (wajib jika ditolak)</label><textarea id="vc" rows="2"></textarea><div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="doV(${id},1)">Setujui</button><button class="btn d" onclick="doV(${id},0)">Tolak</button><button class="btn o" onclick="closeM()">Batal</button></div>`)}
+function doV(id,ok){const r=REQ.find(x=>x.id==id),c=$('#vc').value.trim();
+ if(!ok&&!c)return toast('Alasan penolakan wajib diisi.',1);
+ r.st=ok?'Disetujui':'Ditolak';r.cat=c;
+ if(ok&&!P.find(p=>p.gid==r.gid&&p.tgl==r.tgl)){const g=G.find(x=>x.id==r.gid);addP(g,r.tgl,r.kat,'','','-')}
+ closeM();toast('Pengajuan '+r.st.toLowerCase()+'.');verif()}
+function koreksi(){
+ const l=P.filter(p=>!S.kf||p.gid==S.kf).sort((a,b)=>b.tgl.localeCompare(a.tgl)||a.gid-b.gid).slice(0,30);
+ $('#m').innerHTML=head('Koreksi Data Presensi','Ubah status jika terjadi kesalahan input. Alasan wajib dan tercatat di log.')+`<div class="card"><label for="kf">Filter guru</label><select id="kf" onchange="S.kf=this.value;koreksi()" style="max-width:320px"><option value="">Semua guru</option>${G.map(g=>`<option value="${g.id}" ${S.kf==g.id?'selected':''}>${e(g.nama)}</option>`).join('')}</select><br><br>${tbl(['Tanggal','Guru','Status','Masuk','Aksi'],l.map(p=>`<tr><td>${fmt(p.tgl)}</td><td>${e(gn(p.gid))}</td><td>${bd(st(p))}</td><td>${p.masuk||'-'}</td><td><button class="btn s n" onclick="mKor(${p.id})">Koreksi</button></td></tr>`))}<p style="color:var(--mut);font-size:13px">Menampilkan maksimal 30 entri terbaru.</p></div>`}
+function mKor(id){const p=P.find(x=>x.id==id);modal(`<h3>Koreksi presensi</h3><p>${e(gn(p.gid))} – ${fmt(p.tgl)}<br>Status saat ini: ${bd(p.status)}</p><label for="ks">Status baru</label><select id="ks">${['Hadir','Izin','Sakit','Alpa'].map(s=>`<option ${s==p.status?'selected':''}>${s}</option>`).join('')}</select><label for="ka">Alasan koreksi (wajib)</label><textarea id="ka" rows="2"></textarea><div style="display:flex;gap:8px;margin-top:14px"><button class="btn" onclick="doK(${id})">Simpan koreksi</button><button class="btn o" onclick="closeM()">Batal</button></div>`)}
+function doK(id){const p=P.find(x=>x.id==id),a=$('#ka').value.trim(),n=$('#ks').value;
+ if(!a)return toast('Alasan koreksi wajib diisi.',1);
+ LOG.unshift({id:nid++,gid:p.gid,tgl:p.tgl,lama:p.status,baru:n,alasan:a,waktu:new Date().toLocaleString('id-ID')});
+ p.status=n;p.validasi='Terverifikasi';closeM();toast('Presensi dikoreksi dan dicatat di log.');koreksi()}
+function log(){$('#m').innerHTML=head('Log Koreksi','Jejak audit setiap perubahan data presensi')+`<div class="card">${tbl(['Waktu','Guru','Tanggal presensi','Status lama','Status baru','Alasan'],LOG.map(l=>`<tr><td>${l.waktu}</td><td>${e(gn(l.gid))}</td><td>${fmt(l.tgl)}</td><td>${bd(l.lama)}</td><td>${bd(l.baru)}</td><td>${e(l.alasan)}</td></tr>`),'Belum ada koreksi. Koreksi pertama akan muncul di sini.')}</div>`}
+function guru(){$('#m').innerHTML=head('Data Guru','Kelola master data guru aktif','<button class="btn" onclick="mGuru(0)">Tambah guru</button>')+`<div class="card">${tbl(['Nama','NIP / NIK','Mata pelajaran','Aksi'],G.map(g=>`<tr><td>${e(g.nama)}</td><td>${e(g.nip)}</td><td>${e(g.mapel)}</td><td><button class="btn s n" onclick="mGuru(${g.id})">Ubah</button> <button class="btn s d" onclick="hapusG(${g.id})">Hapus</button></td></tr>`))}</div>`}
+function mGuru(id){const g=G.find(x=>x.id==id)||{nama:'',nip:'',mapel:''};modal(`<h3>${id?'Ubah':'Tambah'} guru</h3><label for="g1">Nama lengkap</label><input id="g1" value="${e(g.nama)}"><label for="g2">NIP / NIK</label><input id="g2" value="${e(g.nip)}"><label for="g3">Mata pelajaran</label><input id="g3" value="${e(g.mapel)}"><div style="display:flex;gap:8px;margin-top:14px"><button class="btn" onclick="saveG(${id})">Simpan</button><button class="btn o" onclick="closeM()">Batal</button></div>`)}
+function saveG(id){const v=[$('#g1').value.trim(),$('#g2').value.trim(),$('#g3').value.trim()];if(v.some(x=>!x))return toast('Semua kolom wajib diisi.',1);
+ if(id){Object.assign(G.find(x=>x.id==id),{nama:v[0],nip:v[1],mapel:v[2]})}else G.push({id:nid++,nama:v[0],nip:v[1],mapel:v[2]});closeM();toast('Data guru tersimpan.');guru()}
+function hapusG(id){if(P.some(p=>p.gid==id))return toast('Guru ini memiliki riwayat presensi sehingga tidak dapat dihapus.',1);G.splice(G.findIndex(x=>x.id==id),1);guru()}
+function laporan(){
+ const f=p=>S.pr=='harian'?p.tgl==TODAY:S.pr=='bulanan'?p.tgl.startsWith(BULAN):true;
+ const rows=G.map(g=>{const a=P.filter(p=>p.gid==g.id&&f(p)),n=k=>a.filter(p=>st(p)==k).length,t=a.length;return{g,h:n('Hadir'),l:n('Terlambat'),i:n('Izin'),s:n('Sakit'),x:n('Alpa'),t}});
+ const pc=(a,b)=>b?Math.round(a/b*100)+'%':'-';
+ $('#m').innerHTML=head('Laporan Rekapitulasi','Kehadiran dan kedisiplinan guru untuk bahan evaluasi dan Raker','<button class="btn noprint" onclick="window.print()">Cetak / simpan PDF</button>')+
+ `<div class="card noprint"><label for="pr">Periode</label><select id="pr" onchange="S.pr=this.value;laporan()" style="max-width:260px"><option value="harian" ${S.pr=='harian'?'selected':''}>Harian (${fmt(TODAY)})</option><option value="bulanan" ${S.pr=='bulanan'?'selected':''}>Bulanan (November 2026)</option><option value="semester" ${S.pr=='semester'?'selected':''}>Semester (seluruh data)</option></select></div>
+ <div class="card"><h3 style="margin-bottom:4px">Smart Sukses School – Laporan Kehadiran Guru</h3><p style="margin:0 0 10px;color:var(--mut)">Periode: ${S.pr}. Kedisiplinan = hadir tepat waktu dibagi total hari tercatat.</p>${tbl(['Guru','Hadir','Terlambat','Izin','Sakit','Alpa','Kehadiran','Kedisiplinan'],rows.map(r=>`<tr><td>${e(r.g.nama)}</td><td>${r.h}</td><td>${r.l}</td><td>${r.i}</td><td>${r.s}</td><td>${r.x}</td><td>${pc(r.h+r.l,r.t)}</td><td><b>${pc(r.h,r.t)}</b></td></tr>`))}</div>
+ <p class="noprint" style="color:var(--mut);font-size:13px">Ekspor Excel dan file PDF langsung dari server akan tersedia pada versi dengan backend. Untuk sekarang gunakan tombol cetak lalu pilih Simpan sebagai PDF.</p>`}
+render();
+</script></body></html>
